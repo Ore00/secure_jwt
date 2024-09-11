@@ -56,11 +56,11 @@
             "@php artisan key:generate || echo 'Skipping key:generate as artisan is unavailable until the app is running.'"
         ],
         "post-install-cmd": [
-            "./wait-for-it.sh laravel_db:3306 -- php artisan migrate --force || echo 'Skipping migrations as artisan is unavailable until the app is running.'"
+            "./bin/wait-for-it.sh laravel_db:3306 -- php artisan migrate --force || echo 'Skipping migrations as artisan is unavailable until the app is running.'"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-             "./wait-for-it.sh laravel_db:3306 -- php artisan migrate --force || echo 'Skipping migrations as artisan is unavailable until the app is running.'"
+             "./bin/wait-for-it.sh laravel_db:3306 -- php artisan migrate --force || echo 'Skipping migrations as artisan is unavailable until the app is running.'"
         ],
         "docker-artisan-key": [
             "@php artisan key:generate --ansi"
