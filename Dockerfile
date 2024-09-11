@@ -21,7 +21,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd curl
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 
 # Set working directory
 WORKDIR /var/www
@@ -32,19 +33,15 @@ COPY . .
 # Set permissions for the app
 RUN chown -R www-data:www-data /var/www
 
-# Install dependencies 
-RUN composer install
-
 # Copy additional scripts
 COPY bin/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 COPY bin/laravel-setup.sh /usr/local/bin/laravel-setup.sh
+COPY bin/laravel-cleanup.sh /usr/local/bin/laravel-cleanup.sh
 
 # Make the scripts executable
+RUN chmod +x /usr/local/bin/laravel-cleanup.sh
 RUN chmod +x /usr/local/bin/laravel-setup.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
-
-# Run the Laravel setup script
-RUN /usr/local/bin/setup-laravel.sh
 
 # Expose the port for the application
 EXPOSE 9000

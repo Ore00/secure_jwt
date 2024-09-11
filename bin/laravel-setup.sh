@@ -1,5 +1,13 @@
 #!/bin/bash
 
+echo "Check if Laravel files exist"
+if [ -f "./artisan" ]; then
+  echo "Laravel files found. Running the script..."
+  ./bin/laravel-cleanup.sh
+else
+  echo "Laravel files not found. Skipping the script."
+fi
+
 echo "Create a new Laravel project in a temporary directory"
 composer create-project --prefer-dist laravel/laravel temp-laravel-app
 

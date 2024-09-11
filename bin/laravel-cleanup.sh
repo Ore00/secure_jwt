@@ -8,6 +8,7 @@ rm -rf .env.laravel
 rm -rf bootstrap
 rm -rf database
 rm -rf config
+rm -rf .env.example.laravel
 rm -rf ph-fpm.d
 rm -rf php-fpm.d
 rm -rf public
