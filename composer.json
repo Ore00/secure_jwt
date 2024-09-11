@@ -1,7 +1,7 @@
 {
     "name": "ore00/secure-jwt",
     "type": "project",
-    "description": "Laravel project with JWT authentication",
+    "description": "A laravel and JWT authentication project",
     "version": "1.0.0",
     "keywords": [
         "laravel",
