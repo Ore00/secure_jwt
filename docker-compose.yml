@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: /bin/sh -c "/usr/local/bin/laravel-setup.sh && composer install && php artisan migrate && php-fpm && tail -f /dev/null"
     container_name: laravel_app
     working_dir: /var/www
     volumes:
@@ -42,16 +43,6 @@ services:
         - laravel_nginx
       depends_on:
         - app
-
-  composer:
-    image: composer:latest
-    container_name: composer
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-    networks:
-      - laravel_nginx
-    command: install
 
 networks:
   laravel_nginx:
