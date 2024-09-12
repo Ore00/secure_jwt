@@ -35,16 +35,18 @@ RUN chown -R www-data:www-data /var/www
 
 # Copy additional scripts
 COPY bin/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+COPY bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY bin/laravel-setup.sh /usr/local/bin/laravel-setup.sh
 COPY bin/laravel-cleanup.sh /usr/local/bin/laravel-cleanup.sh
 
 # Make the scripts executable
 RUN chmod +x /usr/local/bin/laravel-cleanup.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/laravel-setup.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
 
+# Set entrypoint (this replaces CMD)
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 # Expose the port for the application
 EXPOSE 9000
-
-# Start server
-CMD ["php-fpm"]

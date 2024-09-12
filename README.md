@@ -69,6 +69,12 @@ To check if everything is working properly, ensure that:
   docker-compose run --rm app php artisan <command>
   ```
 
+- Start Bash for laravel_app:
+
+  ```bash
+  docker exec -it laravel_app bash
+  ```
+
 ### Additional Configuration
 - Database: The project is set up to use a MySQL 8.0 database. Default credentials are:
 
